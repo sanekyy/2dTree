@@ -111,3 +111,59 @@ Node::Node(Node *parent, QPoint point, Direction dir) {
     this->point = point;
     this->dir = dir;
 }
+
+
+
+
+void Tree2D::findPointsInRectangleStatistic(QRect rect, StatisticResult* res) {
+    findPointsInRectangleStatistic(rect, root, res);
+    return;
+}
+
+void Tree2D::findPointsInRectangleStatistic(QRect &rect, Node *node, StatisticResult* res) {
+
+    if (node == nullptr)
+        return;
+
+    if (rect.contains(node->point)) {
+        res->countOfCompare++;
+        res->pointsInRect++;
+    }
+
+    if (node->dir == VERTICAL) {
+        if (Utils::isRectangleRightOfPoint(node->point, rect)) {
+            res->countOfCompare++;
+            findPointsInRectangleStatistic(rect, node->right, res);
+        }
+        if (Utils::isRectangleLeftOfPoint(node->point, rect)) {
+            res->countOfCompare++;
+            findPointsInRectangleStatistic(rect, node->left, res);
+        }
+    } else {
+        if (Utils::isRectangleAboveOfPoint(node->point, rect)) {
+            res->countOfCompare++;
+            findPointsInRectangleStatistic(rect, node->left, res);
+        }
+        if (Utils::isRectangleBelowOfPoint(node->point, rect)) {
+            res->countOfCompare++;
+            findPointsInRectangleStatistic(rect, node->right, res);
+        }
+    }
+
+    return;
+}
+
+int Tree2D::height() {
+    return height(root);
+}
+
+int max(int a,int b){
+    return a > b ? a : b;
+}
+
+int Tree2D::height(Node *node) {
+    if (node == nullptr)
+        return 0;
+    else
+        return max(height(node->left), height(node->right)) + 1;
+}

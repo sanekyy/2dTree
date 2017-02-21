@@ -12,6 +12,13 @@
 #include <QtCore/QLine>
 
 
+class StatisticResult{
+public:
+    int countOfCompare = 0;
+    int pointsInRect = 0;
+};
+
+
 enum Direction {
     VERTICAL,
     HORIZONTAL
@@ -45,6 +52,14 @@ public:
     QVector<QPoint> findPointsInRectangle(QRect &rect);
 
     QVector<QPoint> findPointsInRectangle(QRect &rect, Node *node);
+
+    void findPointsInRectangleStatistic(QRect rect, StatisticResult* res);
+
+    void findPointsInRectangleStatistic(QRect &rect, Node *node, StatisticResult* res);
+
+    int height();
+
+    int height(Node* node);
 };
 
 

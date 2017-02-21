@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent) {
     connect(generate, SIGNAL(clicked()), this, SLOT(onGenerateClicked()));
 
     pointsCountSpin = new QSpinBox(this);
-    pointsCountSpin->setMaximum(5000);
+    pointsCountSpin->setMaximum(20000);
     pointsCountSpin->setValue(100);
     pointsCountSpin->setSuffix(" points");
 

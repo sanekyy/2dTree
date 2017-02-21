@@ -9,7 +9,7 @@ set(CMAKE_AUTOMOC ON)
 find_package( Qt5Core REQUIRED )# по аналогии с *.pro QT += gui core
 find_package( Qt5Widgets REQUIRED )#виджеты
 
-set(SOURCE_FILES main.cpp workDir/widgets/MainWindow.cpp workDir/widgets/MainWindow.h workDir/widgets/Canvas.cpp workDir/widgets/Canvas.h workDir/utils/Utils.cpp workDir/utils/Utils.h workDir/God.cpp workDir/God.h workDir/algorithm/Tree2D.cpp workDir/algorithm/Tree2D.h)
+set(SOURCE_FILES main.cpp workDir/widgets/MainWindow.cpp workDir/widgets/MainWindow.h workDir/widgets/Canvas.cpp workDir/widgets/Canvas.h workDir/utils/Utils.cpp workDir/utils/Utils.h workDir/God.cpp workDir/God.h workDir/algorithm/Tree2D.cpp workDir/algorithm/Tree2D.h Statistic.cpp Statistic.h)
 add_executable(2dTree ${SOURCE_FILES})
 
 target_link_libraries(2dTree Qt5::Widgets Qt5::Core

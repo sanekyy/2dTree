@@ -42,7 +42,6 @@ void Canvas::paintEvent(QPaintEvent *) {
     for (QPoint point : pointsInRect) {
         painter.drawPoint(point);
     }
-
 }
 
 void Canvas::clear() {

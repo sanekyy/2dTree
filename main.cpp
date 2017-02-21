@@ -1,14 +1,20 @@
 #include <QApplication>
 #include <QtWidgets/QWidget>
 #include "workDir/widgets/MainWindow.h"
+#include "Statistic.h"
 
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    MainWindow mainWindow;
+    if(false){
+        MainWindow mainWindow;
     mainWindow.show();
 
-    return a.exec();
+        return a.exec();
+    } else {
+        (new Statistic())->run();
+        return 0;
+    }
 }
