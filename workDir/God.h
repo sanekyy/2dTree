@@ -6,15 +6,16 @@
 #define INC_2DTREE_GOD_H
 
 
+
 #include <QtCore/QPoint>
 #include <QtCore/QVector>
-#include "widgets/Canvas.h"
 #include "algorithm/Tree2D.h"
+#include "widgets/Canvas.h"
 #include "qdebug.h"
 
 class God {
 
-    Canvas* canvas;
+    Canvas *canvas;
     Tree2D tree;
 
     QVector<QPoint> points;
@@ -24,8 +25,10 @@ public:
     God();
 
     void generate(int count);
+
     int findPointsInRectangle(QRect rect);
-    Canvas* getCanvas() const;
+
+    Canvas *getCanvas() const;
 };
 
 

@@ -29,7 +29,7 @@ void God::generate(int count) {
 
     QPoint point;
 
-    for(int i=0; i<count; i++){
+    for (int i = 0; i < count; i++) {
         do {
             point = Utils::generatePoint(fromX, fromY, toX, toY);
         } while (points.contains(point));
@@ -61,6 +61,6 @@ int God::findPointsInRectangle(QRect rect) {
     return res.size();
 }
 
-Canvas* God::getCanvas() const {
+Canvas *God::getCanvas() const {
     return canvas;
 }

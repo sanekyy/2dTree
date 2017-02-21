@@ -19,9 +19,9 @@ enum Direction {
 
 class Node {
 
-    Node* parent;
-    Node* left;
-    Node* right;
+    Node *parent;
+    Node *left;
+    Node *right;
 
     QPoint point;
     Direction dir;
@@ -33,18 +33,19 @@ public:
 };
 
 
-
 class Tree2D {
-    Node* root = nullptr;
+    Node *root = nullptr;
 
 
 public:
     void clear();
-    QLine addPoint(QPoint point);
-    QVector<QPoint> findPointsInRectangle(QRect& rect);
-    QVector<QPoint> findPointsInRectangle(QRect& rect, Node *node);
-};
 
+    QLine addPoint(QPoint point);
+
+    QVector<QPoint> findPointsInRectangle(QRect &rect);
+
+    QVector<QPoint> findPointsInRectangle(QRect &rect, Node *node);
+};
 
 
 #endif //INC_2DTREE_TREE2D_H

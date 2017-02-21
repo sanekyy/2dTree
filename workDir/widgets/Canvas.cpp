@@ -10,8 +10,7 @@ Canvas::Canvas(QWidget *parent) : QWidget(parent) {
 }
 
 
-void Canvas::paintEvent(QPaintEvent*) {
-
+void Canvas::paintEvent(QPaintEvent *) {
 
 
     QPainter painter(this);
@@ -38,8 +37,8 @@ void Canvas::paintEvent(QPaintEvent*) {
     }
 
 
-    painter.setBrush(QBrush(Qt::red));
-    painter.setPen(QPen(Qt::red));
+    painter.setBrush(QBrush(QColor(255,0,255)));
+    painter.setPen(QPen(QColor(255,0,255)));
     for (QPoint point : pointsInRect) {
         painter.drawPoint(point);
     }
@@ -56,7 +55,7 @@ void Canvas::clear() {
     painter.setBrush(QBrush(Qt::white));
     painter.setPen(QPen(Qt::white));
 
-    painter.drawRect(0,0, this->width(), this->height());
+    painter.drawRect(0, 0, this->width(), this->height());
 }
 
 void Canvas::setPointsInRest(QVector<QPoint> points) {
@@ -76,6 +75,6 @@ void Canvas::setPoints(QVector<QPoint> points) {
 }
 
 void Canvas::showOrHideLines() {
-    canDrawLines=!canDrawLines;
+    canDrawLines = !canDrawLines;
     this->repaint();
 }

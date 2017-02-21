@@ -9,54 +9,54 @@ QLine Tree2D::addPoint(QPoint point) {
 
     int fromX = 0, fromY = 0, toX = 2000, toY = 2000;
 
-    if(root == nullptr){
+    if (root == nullptr) {
         root = new Node(nullptr, point, VERTICAL);
         return QLine(point.x(), fromY, point.x(), toY);
     }
 
-    Node* curr = root;
+    Node *curr = root;
 
-    while(true){
-        if(curr->dir == VERTICAL){
-            if(point.x() < curr->point.x()){
-                if(curr->left != nullptr) {
+    while (true) {
+        if (curr->dir == VERTICAL) {
+            if (point.x() < curr->point.x()) {
+                if (curr->left != nullptr) {
                     toX = curr->point.x();
                     curr = curr->left;
                 } else {
                     toX = curr->point.x();
-                    Node* node = new Node(curr, point, HORIZONTAL);
+                    Node *node = new Node(curr, point, HORIZONTAL);
                     curr->left = node;
                     return QLine(fromX, node->point.y(), toX, node->point.y());
                 }
             } else {
-                if(curr->right != nullptr) {
+                if (curr->right != nullptr) {
                     fromX = curr->point.x();
                     curr = curr->right;
                 } else {
                     fromX = curr->point.x();
-                    Node* node = new Node(curr, point, HORIZONTAL);
+                    Node *node = new Node(curr, point, HORIZONTAL);
                     curr->right = node;
                     return QLine(fromX, node->point.y(), toX, node->point.y());
                 }
             }
         } else {
-            if(point.y() < curr->point.y()){
-                if(curr->left != nullptr) {
+            if (point.y() < curr->point.y()) {
+                if (curr->left != nullptr) {
                     toY = curr->point.y();
                     curr = curr->left;
                 } else {
                     toY = curr->point.y();
-                    Node* node = new Node(curr, point, VERTICAL);
+                    Node *node = new Node(curr, point, VERTICAL);
                     curr->left = node;
                     return QLine(node->point.x(), fromY, node->point.x(), toY);
                 }
             } else {
-                if(curr->right != nullptr) {
+                if (curr->right != nullptr) {
                     fromY = curr->point.y();
                     curr = curr->right;
                 } else {
                     fromY = curr->point.y();
-                    Node* node = new Node(curr, point, VERTICAL);
+                    Node *node = new Node(curr, point, VERTICAL);
                     curr->right = node;
                     return QLine(node->point.x(), fromY, node->point.x(), toY);
                 }
@@ -70,7 +70,7 @@ QVector<QPoint> Tree2D::findPointsInRectangle(QRect &rect) {
     return findPointsInRectangle(rect, root);
 }
 
-QVector<QPoint> Tree2D::findPointsInRectangle(QRect& rect, Node* node) {
+QVector<QPoint> Tree2D::findPointsInRectangle(QRect &rect, Node *node) {
     QVector<QPoint> res;
 
     if (node == nullptr)

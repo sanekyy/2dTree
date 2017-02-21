@@ -13,33 +13,36 @@
 #include <QtWidgets/QLabel>
 #include "../God.h"
 
-class MainWindow : public QWidget{
+class MainWindow : public QWidget {
 
-    Q_OBJECT
+Q_OBJECT
 
-    QVBoxLayout* mainLayout;
-    QHBoxLayout* bottomLayout;
+    QVBoxLayout *mainLayout;
+    QHBoxLayout *bottomLayout;
 
-    QPushButton* generate;
-    QPushButton* lines;
+    QPushButton *generate;
+    QPushButton *lines;
 
-    QSpinBox* pointsCountSpin;
-    QSpinBox* rectangleX;
-    QSpinBox* rectangleY;
-    QSpinBox* rectangleH;
-    QSpinBox* rectangleW;
+    QSpinBox *pointsCountSpin;
+    QSpinBox *rectangleX;
+    QSpinBox *rectangleY;
+    QSpinBox *rectangleH;
+    QSpinBox *rectangleW;
 
-    QLabel* pointsInRectVal;
-    QLabel* pointsInRectSuffix;
+    QLabel *pointsInRectVal;
+    QLabel *pointsInRectSuffix;
 
-    God* god;
+    God *god;
 
 public:
-    MainWindow(QWidget* parent=0);
+    MainWindow(QWidget *parent = 0);
 
 private slots:
+
     void onGenerateClicked();
+
     void onShowOrHideLinesClicked();
+
     void onRectangleChanged();
 };
 

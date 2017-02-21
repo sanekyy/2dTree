@@ -27,42 +27,41 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent) {
     rectangleX->setMaximum(god->getCanvas()->width());
     rectangleX->setSuffix(" x");
     rectangleX->setValue(100);
-    connect(rectangleX, static_cast<void(QSpinBox::*)(int)>(&QSpinBox::valueChanged),
-            [=](int i){onRectangleChanged();});
+    connect(rectangleX, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
+            [=](int i) { onRectangleChanged(); });
 
     rectangleY = new QSpinBox(this);
     rectangleY->setMaximum(god->getCanvas()->height());
     rectangleY->setSuffix(" y");
     rectangleY->setValue(100);
-    connect(rectangleY, static_cast<void(QSpinBox::*)(int)>(&QSpinBox::valueChanged),
-            [=](int i){onRectangleChanged();});
+    connect(rectangleY, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
+            [=](int i) { onRectangleChanged(); });
 
     rectangleH = new QSpinBox(this);
     rectangleH->setMaximum(god->getCanvas()->width());
     rectangleH->setSuffix(" height");
     rectangleH->setValue(100);
-    connect(rectangleH, static_cast<void(QSpinBox::*)(int)>(&QSpinBox::valueChanged),
-            [=](int i){onRectangleChanged();});
+    connect(rectangleH, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
+            [=](int i) { onRectangleChanged(); });
 
     rectangleW = new QSpinBox(this);
     rectangleW->setMaximum(god->getCanvas()->width());
     rectangleW->setSuffix(" width");
     rectangleW->setValue(100);
-    connect(rectangleW, static_cast<void(QSpinBox::*)(int)>(&QSpinBox::valueChanged),
-            [=](int i){onRectangleChanged();});
+    connect(rectangleW, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
+            [=](int i) { onRectangleChanged(); });
 
     QRect rect = QRect(rectangleX->value(), rectangleY->value(),
                        rectangleW->value(), rectangleH->value());
     god->getCanvas()->setRect(rect);
 
     pointsInRectVal = new QLabel();
-    pointsInRectVal->setAlignment(Qt::AlignRight|Qt::AlignVCenter);
+    pointsInRectVal->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
     pointsInRectSuffix = new QLabel("points in rect");
-    pointsInRectSuffix->setAlignment(Qt::AlignLeft|Qt::AlignVCenter);
+    pointsInRectSuffix->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
 
     lines = new QPushButton("show|hide lines", this);
     connect(lines, SIGNAL(clicked()), this, SLOT(onShowOrHideLinesClicked()));
-
 
 
     bottomLayout = new QHBoxLayout(this);
@@ -75,8 +74,6 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent) {
     bottomLayout->addWidget(pointsInRectVal);
     bottomLayout->addWidget(pointsInRectSuffix);
     bottomLayout->addWidget(lines);
-
-
 
 
     mainLayout->addWidget(god->getCanvas());

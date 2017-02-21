@@ -11,8 +11,8 @@
 #include "QLine"
 #include "QPoint"
 
-class Canvas : public QWidget{
-    Q_OBJECT
+class Canvas : public QWidget {
+Q_OBJECT
 
     bool canDraw = false;
 
@@ -25,12 +25,13 @@ class Canvas : public QWidget{
     bool canDrawLines = false;
 
 public:
-    Canvas(QWidget* parent = 0);
-    void enableDraw(){ canDraw = true; }
+    Canvas(QWidget *parent = 0);
+
+    void enableDraw() { canDraw = true; }
 
     void clear();
 
-    void paintEvent(QPaintEvent*);
+    void paintEvent(QPaintEvent *);
 
     void setRect(QRect rect);
 
