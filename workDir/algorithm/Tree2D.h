@@ -8,6 +8,8 @@
 
 #include <QtCore/QPoint>
 #include <QtCore/QRect>
+#include <QtCore/QVector>
+#include <QtCore/QLine>
 
 
 enum Direction {
@@ -33,12 +35,14 @@ public:
 
 
 class Tree2D {
-    Node* root;
+    Node* root = nullptr;
 
 
 public:
-    void addPoint(QPoint point);
-    QVector<int> findPointsInRectangle(QRect& rect, Node *node = this->root);
+    void clear();
+    QLine addPoint(QPoint point);
+    QVector<QPoint> findPointsInRectangle(QRect& rect);
+    QVector<QPoint> findPointsInRectangle(QRect& rect, Node *node);
 };
 
 

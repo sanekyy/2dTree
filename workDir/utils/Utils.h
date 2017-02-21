@@ -13,7 +13,15 @@ class Utils {
 public:
     static QPoint generatePoint(int fromX, int fromY, int toX, int toY);
 
-    static bool isPointInRectangle(QPoint point, QRect rect);
+    static bool isPointInRectangle(QPoint& point, QRect& rect);
+
+    static bool isRectangleRightOfPoint(QPoint& point, QRect &rect);
+
+    static bool isRectangleLeftOfPoint(QPoint& point, QRect &rect);
+
+    static bool isRectangleAboveOfPoint(QPoint &point, QRect &rect);
+
+    static bool isRectangleBelowOfPoint(QPoint &point, QRect &rect);
 };
 
 

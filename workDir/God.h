@@ -10,6 +10,7 @@
 #include <QtCore/QVector>
 #include "widgets/Canvas.h"
 #include "algorithm/Tree2D.h"
+#include "qdebug.h"
 
 class God {
 
@@ -17,12 +18,13 @@ class God {
     Tree2D tree;
 
     QVector<QPoint> points;
+    QVector<QLine> lines;
 
 public:
-    God(Canvas* canvas);
+    God();
 
     void generate(int count);
-    void findPointsInRectangle(QRect rect);
+    int findPointsInRectangle(QRect rect);
     Canvas* getCanvas() const;
 };
 
