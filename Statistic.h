@@ -23,6 +23,7 @@ class Statistic {
 
 public:
     void run();
+    void runBalanced();
 };
 
 

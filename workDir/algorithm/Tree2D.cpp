@@ -10,21 +10,21 @@ QLine Tree2D::addPoint(QPoint point) {
     int fromX = 0, fromY = 0, toX = 2000, toY = 2000;
 
     if (root == nullptr) {
-        root = new Node(nullptr, point, VERTICAL);
+        root = new Node(nullptr, point, X);
         return QLine(point.x(), fromY, point.x(), toY);
     }
 
     Node *curr = root;
 
     while (true) {
-        if (curr->dir == VERTICAL) {
+        if (curr->axis == X) {
             if (point.x() < curr->point.x()) {
                 if (curr->left != nullptr) {
                     toX = curr->point.x();
                     curr = curr->left;
                 } else {
                     toX = curr->point.x();
-                    Node *node = new Node(curr, point, HORIZONTAL);
+                    Node *node = new Node(curr, point, Y);
                     curr->left = node;
                     return QLine(fromX, node->point.y(), toX, node->point.y());
                 }
@@ -34,7 +34,7 @@ QLine Tree2D::addPoint(QPoint point) {
                     curr = curr->right;
                 } else {
                     fromX = curr->point.x();
-                    Node *node = new Node(curr, point, HORIZONTAL);
+                    Node *node = new Node(curr, point, Y);
                     curr->right = node;
                     return QLine(fromX, node->point.y(), toX, node->point.y());
                 }
@@ -46,7 +46,7 @@ QLine Tree2D::addPoint(QPoint point) {
                     curr = curr->left;
                 } else {
                     toY = curr->point.y();
-                    Node *node = new Node(curr, point, VERTICAL);
+                    Node *node = new Node(curr, point, X);
                     curr->left = node;
                     return QLine(node->point.x(), fromY, node->point.x(), toY);
                 }
@@ -56,7 +56,7 @@ QLine Tree2D::addPoint(QPoint point) {
                     curr = curr->right;
                 } else {
                     fromY = curr->point.y();
-                    Node *node = new Node(curr, point, VERTICAL);
+                    Node *node = new Node(curr, point, X);
                     curr->right = node;
                     return QLine(node->point.x(), fromY, node->point.x(), toY);
                 }
@@ -81,7 +81,7 @@ QVector<QPoint> Tree2D::findPointsInRectangle(QRect &rect, Node *node) {
 
     }
 
-    if (node->dir == VERTICAL) {
+    if (node->axis == X) {
         if (Utils::isRectangleRightOfPoint(node->point, rect)) {
             res << findPointsInRectangle(rect, node->right);
         }
@@ -104,12 +104,19 @@ void Tree2D::clear() {
     root = nullptr;
 }
 
-Node::Node(Node *parent, QPoint point, Direction dir) {
+Node::Node(Node *parent, QPoint point, Axis dir) {
     this->parent = parent;
     this->left = nullptr;
     this->right = nullptr;
     this->point = point;
-    this->dir = dir;
+    this->axis = dir;
+}
+
+Node::Node(QPoint point, Node* left, Node* right, Axis dir) {
+    this->left = left;
+    this->right = right;
+    this->point = point;
+    this->axis = dir;
 }
 
 
@@ -125,27 +132,27 @@ void Tree2D::findPointsInRectangleStatistic(QRect &rect, Node *node, StatisticRe
     if (node == nullptr)
         return;
 
+    res->countOfCompare++;
     if (rect.contains(node->point)) {
-        res->countOfCompare++;
         res->pointsInRect++;
     }
 
-    if (node->dir == VERTICAL) {
+    if (node->axis == X) {
         if (Utils::isRectangleRightOfPoint(node->point, rect)) {
-            res->countOfCompare++;
+            //res->countOfCompare++;
             findPointsInRectangleStatistic(rect, node->right, res);
         }
         if (Utils::isRectangleLeftOfPoint(node->point, rect)) {
-            res->countOfCompare++;
+            //res->countOfCompare++;
             findPointsInRectangleStatistic(rect, node->left, res);
         }
     } else {
         if (Utils::isRectangleAboveOfPoint(node->point, rect)) {
-            res->countOfCompare++;
+            //res->countOfCompare++;
             findPointsInRectangleStatistic(rect, node->left, res);
         }
         if (Utils::isRectangleBelowOfPoint(node->point, rect)) {
-            res->countOfCompare++;
+            //res->countOfCompare++;
             findPointsInRectangleStatistic(rect, node->right, res);
         }
     }
@@ -166,4 +173,33 @@ int Tree2D::height(Node *node) {
         return 0;
     else
         return max(height(node->left), height(node->right)) + 1;
+}
+
+void Tree2D::fillTree(QVector<QPoint> points) {
+    root = fillTree(points, X);
+}
+
+Node* Tree2D::fillTree(QVector<QPoint> points, Axis dir) {
+
+    if(points.size()==0)
+        return nullptr;
+
+    if (dir == X)
+        qSort(points.begin(), points.end(), [](const QPoint &a, const QPoint &b) -> bool {
+            return a.x() < b.x();
+        });
+    else
+        qSort(points.begin(), points.end(), [](const QPoint &a, const QPoint &b) -> bool {
+            return a.y() < b.y();
+        });
+
+    int middle = points.size()/2;
+    QVector<QPoint> left = points.mid(0, middle);
+    QVector<QPoint> right = points.mid(middle+1);
+
+    if(dir == X){
+        return new Node(points.at(middle), fillTree(left, Y), fillTree(right, Y), X);
+    } else {
+        return new Node(points.at(middle), fillTree(left, X), fillTree(right, X), Y);
+    }
 }

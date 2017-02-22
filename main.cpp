@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
 
         return a.exec();
     } else {
-        (new Statistic())->run();
+        (new Statistic())->runBalanced();
         return 0;
     }
 }

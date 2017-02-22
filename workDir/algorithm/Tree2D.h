@@ -19,9 +19,9 @@ public:
 };
 
 
-enum Direction {
-    VERTICAL,
-    HORIZONTAL
+enum Axis {
+    X,
+    Y
 };
 
 class Node {
@@ -31,12 +31,13 @@ class Node {
     Node *right;
 
     QPoint point;
-    Direction dir;
+    Axis axis;
 
     friend class Tree2D;
 
 public:
-    Node(Node *parent, QPoint point, Direction direction);
+    Node(Node *parent, QPoint point, Axis direction);
+    Node(QPoint point, Node* left, Node* right, Axis dir);
 };
 
 
@@ -60,6 +61,10 @@ public:
     int height();
 
     int height(Node* node);
+
+    void fillTree(QVector<QPoint> points);
+
+    Node *fillTree(QVector<QPoint> points, Axis dir);
 };
 
 
