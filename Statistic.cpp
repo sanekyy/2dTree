@@ -65,44 +65,52 @@ void Statistic::run() {
 void Statistic::runBalanced() {
 
 
-    pointsCount << 50000 << 55000 << 60000;
+    for(int i=0; i<MAP_SIZE; i++){
+        for(int j=0; j<MAP_SIZE; j++){
+            pointsArr[i][j]=-1;
+        }
+    }
 
-    /*for(int i=10; i<=1000; i+=100){
-        rectsSize << i;
-    }*/
+    pointsCount << 1000 << 10000 << 100000 << 1000000;
 
-    double allCompare = 0;
-    double compare = 0;
+    rectsSize << 10 << 31 << 100 << 316;
 
-    rectsSize << 100 << 125 << 150<< 175;
-
-    QPoint point = QPoint(1000,1000);
+    QPoint point;
     StatisticResult* result = new StatisticResult();
     int countIteration;
+    double allCompare = 0;
 
     for(int pointCount : pointsCount){
+        points.reserve(pointCount);
         for(int rectSize : rectsSize){
 
             result->countOfCompare = 0;
             result->pointsInRect = 0;
             countIteration = 0;
-            compare = 0;
 
-            while(points.size()<pointCount){
-                while (points.contains(point)) {
+            if(points.size()<pointCount) {
+                while (points.size() < pointCount) {
                     point = Utils::generatePoint(0, 0, MAP_SIZE, MAP_SIZE);
+                    while (pointsArr[point.x()][point.y()]!=-1) {
+                        point.rx()++;
+                        if(point.x()==MAP_SIZE){
+                            point.ry()++;
+                            point.ry()%=MAP_SIZE;
+                        }
+                        point.rx()%=MAP_SIZE;
+                    }
+                    pointsArr[point.x()][point.y()]=1;
+                    points.push_back(point);
                 }
-                points.push_back(point);
+                tree->clear();
+                tree->fillTree(points);
             }
 
-            tree->clear();
-            tree->fillTree(points);
-
-            for(int fromX=0; fromX<MAP_SIZE/2; fromX+=100){
-                for(int fromY=0; fromY<MAP_SIZE/2; fromY+=100){
-                    countIteration++;
-                    tree->findPointsInRectangleStatistic(QRect(fromX, fromY, rectSize, rectSize), result);
-                }
+            for(int i=0; i<100; i++) {
+                countIteration++;
+                tree->findPointsInRectangleStatistic(
+                        QRect(Utils::generatePoint(0,0,MAP_SIZE-rectSize, MAP_SIZE-rectSize),
+                              QSize(rectSize, rectSize)), result);
             }
 
 

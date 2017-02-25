@@ -11,7 +11,9 @@
 
 class Statistic {
 
-    const int MAP_SIZE = 2000;
+    static const int MAP_SIZE = 2000;
+
+    int pointsArr[MAP_SIZE][MAP_SIZE];
 
     QVector<int> pointsCount;
     QVector<int> rectsSize;

@@ -12,6 +12,7 @@
 #include "QPoint"
 
 class Canvas : public QWidget {
+
 Q_OBJECT
 
     bool canDraw = false;

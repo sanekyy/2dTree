@@ -15,12 +15,12 @@ void Canvas::paintEvent(QPaintEvent *) {
 
     QPainter painter(this);
 
-    painter.setBrush(QBrush(Qt::black));
-    painter.setPen(QPen(Qt::black));
+    painter.setBrush(QBrush(Qt::white));
+    painter.setPen(QPen(Qt::white));
     painter.drawRect(0, 0, this->width(), this->height());
 
-    painter.setBrush(QBrush(Qt::darkCyan));
-    painter.setPen(QPen(Qt::darkCyan));
+    painter.setBrush(QBrush(Qt::lightGray));
+    painter.setPen(QPen(Qt::lightGray));
     painter.drawRect(rectangle);
 
     painter.setBrush(QBrush(Qt::green));
@@ -30,15 +30,15 @@ void Canvas::paintEvent(QPaintEvent *) {
             painter.drawLine(line);
         }
 
-    painter.setBrush(QBrush(Qt::white));
-    painter.setPen(QPen(Qt::white));
+    painter.setBrush(QBrush(Qt::black));
+    painter.setPen(QPen(Qt::black));
     for (QPoint point : points) {
         painter.drawPoint(point);
     }
 
 
-    painter.setBrush(QBrush(QColor(255,0,255)));
-    painter.setPen(QPen(QColor(255,0,255)));
+    painter.setBrush(QBrush(Qt::white));
+    painter.setPen(QPen(Qt::white));
     for (QPoint point : pointsInRect) {
         painter.drawPoint(point);
     }

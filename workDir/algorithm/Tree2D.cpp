@@ -78,7 +78,6 @@ QVector<QPoint> Tree2D::findPointsInRectangle(QRect &rect, Node *node) {
 
     if (rect.contains(node->point)) {
         res << node->point;
-
     }
 
     if (node->axis == X) {
@@ -135,24 +134,25 @@ void Tree2D::findPointsInRectangleStatistic(QRect &rect, Node *node, StatisticRe
     res->countOfCompare++;
     if (rect.contains(node->point)) {
         res->pointsInRect++;
+        findPointsInRectangleStatistic(rect, node->right, res);
+        findPointsInRectangleStatistic(rect, node->left, res);
+        return;
     }
 
     if (node->axis == X) {
+        //res->countOfCompare++;
         if (Utils::isRectangleRightOfPoint(node->point, rect)) {
-            //res->countOfCompare++;
             findPointsInRectangleStatistic(rect, node->right, res);
         }
         if (Utils::isRectangleLeftOfPoint(node->point, rect)) {
-            //res->countOfCompare++;
             findPointsInRectangleStatistic(rect, node->left, res);
         }
     } else {
+        //res->countOfCompare++;
         if (Utils::isRectangleAboveOfPoint(node->point, rect)) {
-            //res->countOfCompare++;
             findPointsInRectangleStatistic(rect, node->left, res);
         }
         if (Utils::isRectangleBelowOfPoint(node->point, rect)) {
-            //res->countOfCompare++;
             findPointsInRectangleStatistic(rect, node->right, res);
         }
     }
